@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour{
-public Transform player;
-public float moveSpeed = 1.5f;
-private Rigidbody2D rb;
-private Vector2 movement;
-public HealthBarEnemy Healthbar;
-public float Hitpoints;
-public float MaxHitpoints = 5;
+public class Enemy : MonoBehaviour
+{
+    public Transform player;
+    public float moveSpeed = 1.5f;
+    private Rigidbody2D rb;
+    private Vector2 movement;
+    public HealthBarEnemy Healthbar;
+    public float Hitpoints;
+    public float MaxHitpoints = 5f;
 
-    
+        
     void Start()
     {
         Hitpoints = MaxHitpoints;
         Healthbar.SetHealth(Hitpoints,MaxHitpoints);
-      rb = this.GetComponent<Rigidbody2D>();  
+        rb = this.GetComponent<Rigidbody2D>();  
     }
 
     void Update()
     {
-        Vector3 direction = player .position - transform.position;
+        Vector3 direction = player.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
         direction.Normalize();
