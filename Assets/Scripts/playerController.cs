@@ -15,7 +15,7 @@ public class playerController : MonoBehaviour
     public float rollSpeed;
     
     //Player attack
-    private float playerDamage = 1f;
+    
 
     //To determine whether the player is allowed to do something or not
     private enum PlayerAction
