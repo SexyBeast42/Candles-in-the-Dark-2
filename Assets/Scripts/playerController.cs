@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    //FieldOfViewCall
+    [SerializeField] private FieldOfView fieldOfView;
     //Get player's RigidBody
     private Rigidbody2D rb;
     
@@ -49,6 +51,8 @@ public class playerController : MonoBehaviour
             case PlayerAction.Attacking:
                 break;
         }
+ 
+        fieldOfView.SetOrigin(transform.position);
     }
 
     private void FixedUpdate()
