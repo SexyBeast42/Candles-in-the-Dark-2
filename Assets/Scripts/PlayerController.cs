@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //FieldOfViewCall
     [SerializeField] private FieldOfView fieldOfView;
@@ -13,11 +14,17 @@ public class playerController : MonoBehaviour
     private Vector3 moveDir;
     private Vector3 lastMoveDir;
     private Vector3 rollDir;
+    private float rollCD = 3;
     public const float moveSpeed = 20f;
     public float rollSpeed;
     
     //Player attack
-    
+    public float playerDamage = 1f;
+    public float playerRangeX;
+    public float playerRangeY;
+    public LayerMask enemyLayers;
+    public Transform attackPos;
+
 
     //To determine whether the player is allowed to do something or not
     private enum PlayerAction
@@ -33,7 +40,6 @@ public class playerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerAction = PlayerAction.Normal;
-        Enemy enemy = GetComponent<Enemy>();
     }
     
     void Update()
@@ -46,6 +52,7 @@ public class playerController : MonoBehaviour
                 break;
             
             case PlayerAction.Rolling:
+                HandlePlayerMovement();
                 break;
             
             case PlayerAction.Attacking:
@@ -77,15 +84,19 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = GetMouseWorldPosition();
-            Vector3 mouseDir = (mousePosition - transform.position).normalized; //mouseDir to be used with anims
-                    
-            //When you have anims, you can make it so that the player stops moving when they are attacking
-            // playerAction = PlayerAction.Attacking;
-            // moveDir = Vector3.zero;
-            // playerAction = PlayerAction.Normal;
-            //Here you would add anims when we have, need state machine to make the anims work proper dapper like
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(playerRangeX, playerRangeY), 0, enemyLayers);
+            
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(playerDamage);
+            }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPos.position, new Vector2(playerRangeX, playerRangeY));
     }
 
     //Function to handle how the player moves
@@ -124,19 +135,22 @@ public class playerController : MonoBehaviour
                     lastMoveDir = moveDir;
                 }
 
-
-                if (Input.GetKeyDown(KeyCode.Space))
+                //Player roll
+                if (rollCD > 0 && Input.GetKeyDown(KeyCode.Space))
                 {
                     rollDir = lastMoveDir;
                     rollSpeed = 250f;
-
+                    
                     playerAction = PlayerAction.Rolling;
+                    
+                    StartCoroutine(RollCooldown());
                 } 
                 
                 break;
             
             //Handling player rolling
             case PlayerAction.Rolling:
+                //print(playerAction);
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
@@ -152,6 +166,14 @@ public class playerController : MonoBehaviour
                 break;
         }
     }
+    
+    //Cooldown for the player's roll
+    IEnumerator RollCooldown()
+    {
+        rollCD--;
+        yield return new WaitForSeconds(5f);
+        rollCD++;
+    }
 
     //Get the position of the mouse in the world
     public static Vector3 GetMouseWorldPosition()
@@ -166,5 +188,4 @@ public class playerController : MonoBehaviour
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
         return worldPosition;
     }
-    
 }
