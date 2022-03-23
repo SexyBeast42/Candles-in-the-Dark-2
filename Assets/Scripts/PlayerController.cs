@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     //FieldOfViewCall
     [SerializeField] private FieldOfView fieldOfView;
+    
     //Get player's RigidBody
     private Rigidbody2D rb;
     
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour
     public LayerMask enemyLayers;
     public Transform attackPos;
 
+    //Player rotation
+    public Camera cam;
+    private Vector2 mousePos;
 
     //To determine whether the player is allowed to do something or not
     private enum PlayerAction
@@ -49,6 +53,10 @@ public class PlayerController : MonoBehaviour
             case PlayerAction.Normal:
                 HandlePlayerMovement();
                 HandlePlayerAttack();
+                HandlePlayerInteraction();
+                
+                //For player rotation
+                mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
                 break;
             
             case PlayerAction.Rolling:
@@ -56,6 +64,7 @@ public class PlayerController : MonoBehaviour
                 break;
             
             case PlayerAction.Attacking:
+                HandlePlayerAttack();
                 break;
         }
  
@@ -69,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerAction.Normal:
                 rb.velocity = moveDir * moveSpeed;
+                HandlePlayerRotation();
                 break;
             
             case PlayerAction.Rolling:
@@ -82,14 +92,29 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePlayerAttack()
     {
-        if (Input.GetMouseButtonDown(0))
+        switch (playerAction)
         {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(playerRangeX, playerRangeY), 0, enemyLayers);
+            case PlayerAction.Normal:
+                if (Input.GetMouseButtonDown(0))
+                {
+                    playerAction = PlayerAction.Attacking;
+                }
+                break;
             
-            for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
-                enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(playerDamage);
-            }
+            case PlayerAction.Rolling:
+                break;
+            
+            case PlayerAction.Attacking:
+                Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, 
+                    new Vector2(playerRangeX, playerRangeY), 0, enemyLayers);
+                
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(playerDamage);
+                }
+
+                playerAction = PlayerAction.Normal;
+                break;
         }
     }
 
@@ -149,6 +174,9 @@ public class PlayerController : MonoBehaviour
                 break;
             
             //Handling player rolling
+            
+            // Player invunerable when rolling
+            
             case PlayerAction.Rolling:
                 //print(playerAction);
                 float rollSpeedDropMultiplier = 5f;
@@ -166,6 +194,13 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+
+    private void HandlePlayerRotation()
+    {
+        Vector2 lookDir = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
+    }
     
     //Cooldown for the player's roll
     IEnumerator RollCooldown()
@@ -173,6 +208,14 @@ public class PlayerController : MonoBehaviour
         rollCD--;
         yield return new WaitForSeconds(5f);
         rollCD++;
+    }
+
+    private void HandlePlayerInteraction()
+    {
+        if (Input.GetKey(KeyCode.F))
+        {
+            Debug.Log("interaction");
+        }
     }
 
     //Get the position of the mouse in the world

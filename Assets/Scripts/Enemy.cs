@@ -6,22 +6,21 @@ public class Enemy : MonoBehaviour
 {
     public Transform player;
     
+    //Enemy's movements
     public float moveSpeed = 1.5f;
     private Rigidbody2D rb;
     private Vector2 movement;
     
+    //Enemy's health
     public HealthBarEnemy Healthbar;
     public float Hitpoints;
     public float MaxHitpoints = 5f;
-    
-    //List of enemies
-    private static List<Enemy> enemyList;
 
-    void Start()
+    void Awake()
     {
         Hitpoints = MaxHitpoints;
         Healthbar.SetHealth(Hitpoints,MaxHitpoints);
-        rb = this.GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();  
     }
 
     void Update()
@@ -29,17 +28,19 @@ public class Enemy : MonoBehaviour
         FindTarget();
     }
     
-    private void FixedUpdate(){
+    private void FixedUpdate()
+    {
         MoveCharacter(movement);
     }
     
-    void MoveCharacter(Vector2 direction){
+    void MoveCharacter(Vector2 direction)
+    {
         rb.MovePosition ((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
     
     public void TakeDamage(float damage)
     {
-        //Debug.Log(gameObject.name + " got damaged.");
+        Debug.Log(gameObject.name + " got damaged.");
         Hitpoints -= damage;
         Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
@@ -67,5 +68,13 @@ public class Enemy : MonoBehaviour
         movement = direction;
     }
     
-    
+    /// Enemy has 8 raycast rays in all directions
+    /// They are smart enough to hide behind walls
+    /// Smart enough to not group up but to distance themselves from other enemies
+    /// Enemy can drop health potions rarely
+    /// 
+    /// Enemy AI Cases
+    /// They have a wander function
+    /// When the player gets in range, they are in attack mode
+    /// They move in closer to the player, but stop in a distance in 
 }
