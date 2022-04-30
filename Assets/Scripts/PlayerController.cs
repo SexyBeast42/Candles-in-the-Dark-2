@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAction = PlayerAction.Normal;
     }
-    
+
     void Update()
     {
         switch (playerAction)
@@ -174,11 +174,11 @@ public class PlayerController : MonoBehaviour
                 break;
             
             //Handling player rolling
-            
-            // Player invunerable when rolling
-            
+
             case PlayerAction.Rolling:
                 //print(playerAction);
+                GetComponent<BoxCollider2D>().enabled = false; //Player invunerable while rolling, but may break collisions
+                
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 
@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
 
                 if (rollSpeed < rollSpeedMinimum)
                 {
+                    GetComponent<BoxCollider2D>().enabled = true;
                     playerAction = PlayerAction.Normal;
                 }
                 break;
