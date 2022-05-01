@@ -10,11 +10,14 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 1.5f;
     private Rigidbody2D rb;
     private Vector2 movement;
+ 
     
     //Enemy's health
     public HealthBarEnemy Healthbar;
     public float Hitpoints;
+    public GameObject floatingPoints;
     public float MaxHitpoints = 5f;
+    
 
     private float distToPlayer;
     
@@ -30,7 +33,8 @@ public class Enemy : MonoBehaviour
     {
         Hitpoints = MaxHitpoints;
         Healthbar.SetHealth(Hitpoints,MaxHitpoints);
-        rb = GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();
+       
     }
 
     void Update()
@@ -71,7 +75,7 @@ public class Enemy : MonoBehaviour
         Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         StartCoroutine(DazedTime());
-        
+    Instantiate(floatingPoints,transform.position, Quaternion.identity);    
         if(Hitpoints <= 0){
             // Debug.Log(gameObject.name + " dieded.");
             Destroy(gameObject);
