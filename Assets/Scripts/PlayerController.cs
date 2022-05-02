@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
  
-        fieldOfView.SetOrigin(transform.position);
+    
     }
 
     private void FixedUpdate()
