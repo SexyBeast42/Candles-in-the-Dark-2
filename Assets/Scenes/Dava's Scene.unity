@@ -10693,7 +10693,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1699092293
 Transform:
   m_ObjectHideFlags: 0
@@ -12216,10 +12216,10 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256
-  viewRadius: 0
+  viewRadius: 6.74
   Healthbar: {fileID: 2011939033}
   Hitpoints: 0
-  floatingPoints: {fileID: 1311215135}
+  floatingPoints: {fileID: 1599957648}
   MaxHitpoints: 5
   distToPlayer: 0
   enemyRangeX: 2.52
