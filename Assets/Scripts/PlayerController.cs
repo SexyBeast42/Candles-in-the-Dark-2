@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     //FieldOfViewCall
     [SerializeField] private FieldOfView fieldOfView;
+    private LightController lc;
     
     //Get player's RigidBody
     private Rigidbody2D rb;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float rollSpeed;
     
     //Player attack
-    public float playerDamage = 1f, playerRangeX, playerRangeY;
+    public float playerDamage = 1f, playerRangeX, playerRangeY, increaseAmount = 3f;
     public LayerMask enemyLayers;
     public Transform attackPos;
     
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        lc = GetComponentInChildren<LightController>();
         playerAction = PlayerAction.Normal;
     }
 
@@ -67,8 +69,6 @@ public class PlayerController : MonoBehaviour
                 HandlePlayerAttack();
                 break;
         }
- 
-    
     }
 
     private void FixedUpdate()
@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePlayerAttack()
     {
+        // Increase amount doesnt go over
+        
         switch (playerAction)
         {
             case PlayerAction.Normal:
@@ -108,14 +110,27 @@ public class PlayerController : MonoBehaviour
                 Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, 
                     new Vector2(playerRangeX, playerRangeY), 0, enemyLayers);
                 
+                //StopAllCoroutines();
+                
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage);
-                } 
 
+                    lc.IncreaseLightRadius(4f + increaseAmount);
+                    increaseAmount++;
+                }
+                
+                //StartCoroutine(DecreaseLightRange(increaseAmount));
                 playerAction = PlayerAction.Normal;
                 break;
         }
+    }
+
+    IEnumerator DecreaseLightRange(float amount)
+    {
+        increaseAmount--;
+        yield return new WaitForSeconds(2);
+        lc.DecreaseLightRadius(amount);
     }
 
     private void OnDrawGizmosSelected()
