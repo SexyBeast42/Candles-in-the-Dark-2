@@ -4748,6 +4748,7 @@ MonoBehaviour:
   playerDamage: 1
   playerRangeX: 1.5
   playerRangeY: 1
+  increaseAmount: 3
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -12204,7 +12205,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068846006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2f672b1e314584d8dcce6b6286ca1c, type: 3}
+  m_Script: {fileID: 11500000, guid: d10fc0cc4143137408eaae6007cdd186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 730157584}
@@ -12215,14 +12216,14 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256
-  viewRadius: 5.91
+  viewRadius: 0
   Healthbar: {fileID: 2011939033}
-  Hitpoints: 10
-  floatingPoints: {fileID: 1599957648}
+  Hitpoints: 0
+  floatingPoints: {fileID: 1311215135}
   MaxHitpoints: 5
   distToPlayer: 0
-  enemyRangeX: 1.77
-  enemyRangeY: 2.06
+  enemyRangeX: 2.52
+  enemyRangeY: 3.94
   enemyDamage: 1
   firePoint: {fileID: 1586177849}
 --- !u!50 &2068846010
@@ -12603,6 +12604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e62a4f6cad1d6847936edb669d9e9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reachLightLimit: 0
 --- !u!1 &2140130781
 GameObject:
   m_ObjectHideFlags: 0

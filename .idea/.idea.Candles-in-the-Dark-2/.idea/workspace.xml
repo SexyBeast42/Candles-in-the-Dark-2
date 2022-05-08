@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="759b3a01-002c-4835-9fcd-8cf4313c7900" name="Changes" comment="Player Movement (able to roll as well)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LightController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LightController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyAI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyAI.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +106,7 @@
       <workItem from="1651674963515" duration="5449000" />
       <workItem from="1651945407898" duration="5623000" />
       <workItem from="1652004999608" duration="11261000" />
-      <workItem from="1652017946594" duration="5407000" />
+      <workItem from="1652017946594" duration="6279000" />
     </task>
     <servers />
   </component>

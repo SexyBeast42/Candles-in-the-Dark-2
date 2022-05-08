@@ -116,8 +116,8 @@ public class PlayerController : MonoBehaviour
                 {
                     enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage);
 
-                    lc.IncreaseLightRadius(4f + increaseAmount);
                     increaseAmount++;
+                    lc.IncreaseLightRadius(increaseAmount);
                 }
                 
                 //StartCoroutine(DecreaseLightRange(increaseAmount));
