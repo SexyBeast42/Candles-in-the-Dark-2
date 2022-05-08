@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,19 +13,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     
     //Player movements
-    private Vector3 moveDir;
-    private Vector3 lastMoveDir;
-    private Vector3 rollDir;
+    private Vector3 moveDir, lastMoveDir, rollDir;
     private float rollCD = 3;
     public const float moveSpeed = 20f;
     public float rollSpeed;
     
     //Player attack
-    public float playerDamage = 1f;
-    public float playerRangeX;
-    public float playerRangeY;
+    public float playerDamage = 1f, playerRangeX, playerRangeY;
     public LayerMask enemyLayers;
     public Transform attackPos;
+    
+    //Player health
+    private float hitPoints = 5f;
 
     //Player rotation
     public Camera cam;
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
                 
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(playerDamage);
-                }
+                    enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage);
+                } 
 
                 playerAction = PlayerAction.Normal;
                 break;
@@ -216,6 +216,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.F))
         {
             Debug.Log("interaction");
+        }
+    }
+    
+    public void TakeDamage(float damage)
+    {
+        // Debug.Log(gameObject.name + " got damaged.");
+        hitPoints -= damage;
+
+        if(hitPoints <= 0){
+            // Debug.Log(gameObject.name + " dieded.");
+            Destroy(gameObject);
         }
     }
 
