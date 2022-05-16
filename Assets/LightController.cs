@@ -8,8 +8,8 @@ public class LightController : MonoBehaviour
 {
     private Light2D light2D;
 
-    public bool reachLightLimit = false;
-    
+    private bool reachUpperLightLimit = false, reachLowerLightLimit = false;
+
     public void Awake()
     { 
         float startLight = 3f;
@@ -19,44 +19,49 @@ public class LightController : MonoBehaviour
         light2D.pointLightOuterRadius = 3f;
     }
 
-    public void IncreaseLightRadius(float radius)
+    private void FixedUpdate()
     {
-        float rad = radius;
+        // Makes sure that the radius stays in the limit
+        float checkValue = light2D.pointLightOuterRadius;
+        RadiusLimitChecker(checkValue);
+    }
 
-        float radiusLimit = 7f;
-        if (!reachLightLimit && rad >= radiusLimit)
+    private void RadiusLimitChecker(float checkValue)
+    {
+        float topLimit = 7f, lowerLimit = 3f;
+
+        if (checkValue >= topLimit)
         {
-            rad = 6f;
-            
-            light2D.pointLightInnerRadius=+ (rad/2);
-            light2D.pointLightOuterRadius=+ rad;
+            reachUpperLightLimit = true;
         }
 
-        else
+        if (checkValue <= lowerLimit)
         {
-            light2D.pointLightInnerRadius=+ (rad/2);
-            light2D.pointLightOuterRadius=+ rad;
+            reachLowerLightLimit = true;
+        }
+
+        if (checkValue != topLimit && checkValue != lowerLimit)
+        {
+            reachLowerLightLimit = false;
+            reachUpperLightLimit = false;
+        }
+    }
+
+    public void IncreaseLightRadius(float radius)
+    {
+        if (!reachUpperLightLimit)
+        {
+            light2D.pointLightInnerRadius=+ (radius/2);
+            light2D.pointLightOuterRadius=+ radius;
         }
     }
     
     public void DecreaseLightRadius(float radius)
     {
-        float rad = radius;
-
-        float radiusLimit = 3f;
-        if (!reachLightLimit && rad >= radiusLimit)
+        if (!reachLowerLightLimit)
         {
-            rad = 6f;
-            
-            light2D.pointLightInnerRadius=- (rad/2);
-            light2D.pointLightOuterRadius=- rad;
-        }
-
-        else
-        {
-            light2D.pointLightInnerRadius=- (rad/2);
-            light2D.pointLightOuterRadius=- rad;
+            light2D.pointLightInnerRadius=- (radius/2);
+            light2D.pointLightOuterRadius=- radius;
         }
     }
-    //later use coroutine to decrease it
 }
