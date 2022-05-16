@@ -180,7 +180,7 @@ public class EnemyAI : MonoBehaviour
         Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
         StartCoroutine(DazedTime());
-        Instantiate(floatingPoints,transform.position, Quaternion.identity);    
+            
         
         if(Hitpoints <= 0){
             // Debug.Log(gameObject.name + " dieded.");
