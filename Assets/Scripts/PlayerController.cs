@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine.UI;
 
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     public float rollSpeed;
     
     //Player attack
-    public float playerDamage = 1f, playerRangeX, playerRangeY, increaseAmount = 3f;
+    public float playerDamage = 1f, playerRangeX, playerRangeY;
     public LayerMask enemyLayers;
     public Transform attackPos;
     
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
     //Player rotation
     public Camera cam;
     private Vector2 mousePos;
+    
+    //Events
+    public UnityEvent EnemyHit;
 
     //To determine whether the player is allowed to do something or not
     private enum PlayerAction
@@ -52,6 +56,9 @@ public class PlayerController : MonoBehaviour
         playerAction = PlayerAction.Normal;
 
         healthBar.SetMaxHealth(hitPoints);
+        
+        EnemyHit = new UnityEvent();
+        EnemyHit.AddListener(lc.IncreaseCurrentRadius);
     }
 
     void Update()
@@ -98,8 +105,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePlayerAttack()
     {
-        // Increase amount doesnt go over
-        
         switch (playerAction)
         {
             case PlayerAction.Normal:
@@ -115,28 +120,20 @@ public class PlayerController : MonoBehaviour
             case PlayerAction.Attacking:
                 Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, 
                     new Vector2(playerRangeX, playerRangeY), 0, enemyLayers);
-                
-                //StopAllCoroutines();
-                
+
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage);
+                }
 
-                    increaseAmount++;
-                    lc.IncreaseLightRadius(increaseAmount);
+                if (enemiesToDamage.Length != 0)
+                {
+                    EnemyHit.Invoke();
                 }
                 
-                //StartCoroutine(DecreaseLightRange(increaseAmount));
                 playerAction = PlayerAction.Normal;
                 break;
         }
-    }
-
-    IEnumerator DecreaseLightRange(float amount)
-    {
-        increaseAmount--;
-        yield return new WaitForSeconds(2);
-        lc.DecreaseLightRadius(amount);
     }
 
     private void OnDrawGizmosSelected()
@@ -185,7 +182,7 @@ public class PlayerController : MonoBehaviour
                 if (rollCD > 0 && Input.GetKeyDown(KeyCode.Space))
                 {
                     rollDir = lastMoveDir;
-                    rollSpeed = 250f;
+                    rollSpeed = 75f;
                     
                     playerAction = PlayerAction.Rolling;
                     
@@ -198,7 +195,7 @@ public class PlayerController : MonoBehaviour
 
             case PlayerAction.Rolling:
                 //print(playerAction);
-                GetComponent<BoxCollider2D>().enabled = false; //Player invunerable while rolling, but may break collisions
+                // GetComponent<BoxCollider2D>().enabled = false; //Player invunerable while rolling, but may break collisions
                 
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
@@ -207,7 +204,7 @@ public class PlayerController : MonoBehaviour
 
                 if (rollSpeed < rollSpeedMinimum)
                 {
-                    GetComponent<BoxCollider2D>().enabled = true;
+                    // GetComponent<BoxCollider2D>().enabled = true;
                     playerAction = PlayerAction.Normal;
                 }
                 break;

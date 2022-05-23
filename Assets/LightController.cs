@@ -8,55 +8,74 @@ public class LightController : MonoBehaviour
 {
     private Light2D light2D;
 
-    public bool reachLightLimit = false;
+    // Light decrease settings
+    // private float lerpDuration = 3, currentLightRad = 7, endingLightRad = 3, valueToLerp;
+    
+    // Light Radius
+    [SerializeField]private float currentRadiusIncreaser;
     
     public void Awake()
     { 
-        float startLight = 3f;
+        float startLight = 5f;
         
         light2D = GetComponent<Light2D>();
         light2D.pointLightInnerRadius = startLight / 2;
-        light2D.pointLightOuterRadius = 3f;
+        light2D.pointLightOuterRadius = startLight;
+    }
+    
+    IEnumerator AutoRadiusDecreaser()
+    {
+        // print("started Coroutine");
+        
+        yield return new WaitForSeconds(2);
+
+        // float timeElapsed = 0, checkValue = light2D.pointLightOuterRadius;;
+        //
+        // while (timeElapsed < lerpDuration)
+        // {
+        //     valueToLerp = Mathf.Lerp(currentLightRad, endingLightRad, timeElapsed / lerpDuration);
+        //     timeElapsed += Time.deltaTime;
+        //     
+        //     DecreaseLightRadius();
+        //     
+        //     yield return null;
+        // }
+        
+        InvokeRepeating("DecreaseLightRadius", 1f, 5f);
+
+        yield return null;
+        
+        // print("Finished Coroutine");
     }
 
-    public void IncreaseLightRadius(float radius)
+    public void IncreaseLightRadius()
     {
-        float rad = radius;
-
-        float radiusLimit = 7f;
-        if (!reachLightLimit && rad >= radiusLimit)
+        if (currentRadiusIncreaser < 3f)
         {
-            rad = 6f;
-            
-            light2D.pointLightInnerRadius=+ (rad/2);
-            light2D.pointLightOuterRadius=+ rad;
-        }
-
-        else
-        {
-            light2D.pointLightInnerRadius=+ (rad/2);
-            light2D.pointLightOuterRadius=+ rad;
+            currentRadiusIncreaser++;
+            light2D.pointLightInnerRadius += (currentRadiusIncreaser/2);
+            light2D.pointLightOuterRadius += currentRadiusIncreaser;
         }
     }
     
-    public void DecreaseLightRadius(float radius)
+    public void DecreaseLightRadius()
     {
-        float rad = radius;
-
-        float radiusLimit = 3f;
-        if (!reachLightLimit && rad >= radiusLimit)
+        //print("decrease");
+        
+        if (currentRadiusIncreaser > 0f)
         {
-            rad = 6f;
-            
-            light2D.pointLightInnerRadius=- (rad/2);
-            light2D.pointLightOuterRadius=- rad;
-        }
-
-        else
-        {
-            light2D.pointLightInnerRadius=- (rad/2);
-            light2D.pointLightOuterRadius=- rad;
+            light2D.pointLightInnerRadius -= (currentRadiusIncreaser/2);
+            light2D.pointLightOuterRadius -= currentRadiusIncreaser;
+            currentRadiusIncreaser--;
         }
     }
-    //later use coroutine to decrease it
+
+    public void IncreaseCurrentRadius()
+    {
+        StopAllCoroutines();
+        CancelInvoke("AutoRadiusDecreaser");
+        
+        IncreaseLightRadius();
+        StartCoroutine(AutoRadiusDecreaser());
+    }
 }
