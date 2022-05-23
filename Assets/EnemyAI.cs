@@ -53,7 +53,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        print(state);
+        // print(state);
+        
         switch (state)
         {
             default:
@@ -72,10 +73,10 @@ public class EnemyAI : MonoBehaviour
             case State.chasing:
                 SetTarget(player.position);
 
-                Debug.Log("chasing");
+                // Debug.Log("chasing");
                 if (canAttack && Vector3.Distance(transform.position, player.position) < viewRadius)
                 {
-                    Debug.Log("in range");
+                    // Debug.Log("in range");
                     float fireRate = 5f;
                     StartCoroutine(Attacking(fireRate));
                     state = State.attacking;
@@ -135,6 +136,8 @@ public class EnemyAI : MonoBehaviour
         {
             enemiesToDamage[i].GetComponent<PlayerController>().TakeDamage(enemyDamage);
         }
+        
+        state = State.chasing;
     }
 
     IEnumerator Attacking(float fireRate)
@@ -144,7 +147,6 @@ public class EnemyAI : MonoBehaviour
         
         yield return new WaitForSeconds(fireRate);
         canAttack = true;
-        state = State.chasing;
     }
 
     // public void EnemyDetection()
