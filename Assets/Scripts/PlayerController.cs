@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     //Player health
     
     public PlayerHealthbar healthBar;
-    private float hitPoints = 5f;
+    public float hitPoints = 5f, maxHitPoints = 5f;
    
 
     //Player rotation
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         lc = GetComponentInChildren<LightController>();
         playerAction = PlayerAction.Normal;
+
+        healthBar.SetMaxHealth(hitPoints);
     }
 
     void Update()
@@ -243,14 +245,13 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(gameObject.name + " got damaged.");
         
         hitPoints -= damage;
+        healthBar.SetHealth(hitPoints);
        
         if(hitPoints <= 0){
             // Debug.Log(gameObject.name + " dieded.");
             Destroy(gameObject);
         }
     }
-  
-
 
 
     //Get the position of the mouse in the world
