@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
     
     //Player health
     public PlayerHealthbar healthBar;
-    private float hitPoints = 5f;
+    public float hitPoints = 5f, maxHitPoints = 5f;
+   
 
     //Player rotation
     public Camera cam;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour
         healthBar.SetMaxHealth(hitPoints);
         
         playerAction = PlayerAction.Normal;
+
+        healthBar.SetMaxHealth(hitPoints);
         
         EnemyHit = new UnityEvent();
         EnemyHit.AddListener(lc.IncreaseCurrentRadius);
@@ -243,7 +246,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(gameObject.name + " got damaged.");
         
         hitPoints -= damage;
-        healthBar.SetHealth(damage);
+        healthBar.SetHealth(hitPoints);
        
         if(hitPoints <= 0){
             // Debug.Log(gameObject.name + " dieded.");
@@ -251,6 +254,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("SampleScene");
         }
     }
+
 
     //Get the position of the mouse in the world
     public static Vector3 GetMouseWorldPosition()

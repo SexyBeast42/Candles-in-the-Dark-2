@@ -8,12 +8,12 @@ public class PlayerHealthbar : MonoBehaviour
   public Slider slider;
   public void SetMaxHealth(float health)
   {
-slider.maxValue = health;
-slider.value = health;
+    slider.maxValue = health;
+    slider.value = health;
   }
 
-  public void SetHealth (float damage)
+  public void SetHealth (float health)
   {
-    slider.value -= damage;
+    slider.value = health;
   }
 }
