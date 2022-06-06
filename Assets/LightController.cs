@@ -41,7 +41,7 @@ public class LightController : MonoBehaviour
         //     yield return null;
         // }
         
-        InvokeRepeating("DecreaseLightRadius", 1f, 5f);
+        InvokeRepeating("DecreaseLightRadius", 1f, 2f);
 
         yield return null;
         

@@ -76,9 +76,7 @@ public class EnemyAI : MonoBehaviour
                 // Debug.Log("chasing");
                 if (canAttack && Vector3.Distance(transform.position, player.position) < viewRadius)
                 {
-                    // Debug.Log("in range");
-                    float fireRate = 5f;
-                    StartCoroutine(Attacking(fireRate));
+                    // Debug.Log("in range");                 
                     state = State.attacking;
                 }
 
@@ -89,6 +87,8 @@ public class EnemyAI : MonoBehaviour
                 }
                 break;
             case State.attacking:
+                float fireRate = 5f;
+                StartCoroutine(Attacking(fireRate));
                 break;
         }
     }

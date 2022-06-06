@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         lc = GetComponentInChildren<LightController>();
         playerAction = PlayerAction.Normal;
 
-        healthBar.SetMaxHealth(hitPoints);
+
         
         EnemyHit = new UnityEvent();
         EnemyHit.AddListener(lc.IncreaseCurrentRadius);
