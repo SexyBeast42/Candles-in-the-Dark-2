@@ -82,6 +82,7 @@ public class EnemyAI : MonoBehaviour
                     // player.transform.LookAt(player, Vector3.forward);
                     // float fireRate = 5f;
                     // StartCoroutine(Attacking(fireRate));
+                    // Debug.Log("in range");                 
                     state = State.attacking;
                 }
 
