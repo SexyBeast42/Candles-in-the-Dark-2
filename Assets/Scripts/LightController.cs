@@ -13,12 +13,12 @@ public class LightController : MonoBehaviour
         float startLight = 6f;
         
         light2D = GetComponent<Light2D>();
-        light2D.pointLightInnerRadius = startLight / 2;
         light2D.pointLightOuterRadius = startLight;
+        light2D.pointLightInnerRadius = startLight / 2;
     }
     
     // Light decrease settings
-    private float lerpDuration = 4, endingLightRad = 6;
+    private float lerpDuration = 4f, endingLightRad = 6f;
 
     IEnumerator DecreaseRadius()
     {
