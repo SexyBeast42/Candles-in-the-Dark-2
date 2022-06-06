@@ -235,12 +235,13 @@ public class EnemyAI : MonoBehaviour
     //     Gizmos.DrawWireSphere(transform.position, viewRadius);
     // }
     
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Vector2 target)
     {
         // Debug.Log(gameObject.name + " got damaged.");
         Hitpoints -= damage;
         // Healthbar.SetHealth(Hitpoints, MaxHitpoints);
 
+        rb.AddForce(target, ForceMode2D.Impulse);
         StartCoroutine(DazedTime());
             
         

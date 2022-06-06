@@ -3,13 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="759b3a01-002c-4835-9fcd-8cf4313c7900" name="Changes" comment="Player Movement (able to roll as well)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/EnemyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/PlayerHealthbar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerHealthbar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EnemyAI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/EnemyAI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LightController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LightController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main character cand;e 2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Main character cand;e 2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerHealthbar.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerHealthbar.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HealthBarEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HealthBarEnemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/boss 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/boss 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/enemy melee 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/enemy melee 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/enemy ranged 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/enemy ranged 1.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +118,7 @@
       <workItem from="1653317395667" duration="344000" />
       <workItem from="1653902310248" duration="8232000" />
       <workItem from="1654008375793" duration="3548000" />
+      <workItem from="1654028860386" duration="11694000" />
     </task>
     <servers />
   </component>

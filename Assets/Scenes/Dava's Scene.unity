@@ -5378,6 +5378,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackPos: {fileID: 442990299}
+  healthBar: {fileID: 0}
+  hitPoints: 5
+  maxHitPoints: 5
   cam: {fileID: 962430633}
   EnemyHit:
     m_PersistentCalls:
@@ -14094,7 +14097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e62a4f6cad1d6847936edb669d9e9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRadiusIncreaser: 0
 --- !u!1 &2140130781
 GameObject:
   m_ObjectHideFlags: 0
