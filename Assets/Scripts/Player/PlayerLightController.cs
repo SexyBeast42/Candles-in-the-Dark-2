@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class LightController : MonoBehaviour
+public class PlayerLightController : MonoBehaviour
 {
     private Light2D light2D;
     
