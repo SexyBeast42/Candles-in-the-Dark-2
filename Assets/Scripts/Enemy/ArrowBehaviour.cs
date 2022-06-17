@@ -19,7 +19,7 @@ public class ArrowBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            print("Hit Player");
+            // print("Hit Player");
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(bulletDMG);
         }
 

@@ -5,29 +5,29 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-[SerializeField] private float startingHealth;
-public float currentHealth {get; private set;}
+    [SerializeField] private float startingHealth;
+    public float currentHealth {get; private set;}
 
-private void Awake(){
-currentHealth = startingHealth;
-}
-public void TakeDamage(float _damage){
-    currentHealth = Mathf.Clamp(currentHealth - _damage, 0 ,startingHealth);
-    if (currentHealth > 0)
-    {
-        //playerhurt
+    private void Awake(){
+    currentHealth = startingHealth;
     }
-    else
-    {
-        //player dead
+    public void TakeDamage(float _damage){
+        currentHealth = Mathf.Clamp(currentHealth - _damage, 0 ,startingHealth);
+        if (currentHealth > 0)
+        {
+            //playerhurt
+        }
+        else
+        {
+            //player dead
+        }
     }
-}
-private void Update()
-{
- if (Input.GetKeyDown(KeyCode.Z))   
- TakeDamage(1);
-}
-public void AddHealth(float _value){
-    currentHealth = Mathf.Clamp(currentHealth + _value, 0 , startingHealth);
-}
+    private void Update()
+    {
+         if (Input.GetKeyDown(KeyCode.Z))   
+         TakeDamage(1);
+    }
+    public void AddHealth(float _value){
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0 , startingHealth);
+    }
 }
