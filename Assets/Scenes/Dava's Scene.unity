@@ -468,7 +468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21135763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: -0.32, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1417161676}
@@ -4065,7 +4065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &571939082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5378,6 +5378,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   attackPos: {fileID: 442990299}
+  healthBar: {fileID: 0}
+  hitPoints: 5
+  maxHitPoints: 5
   cam: {fileID: 962430633}
   EnemyHit:
     m_PersistentCalls:
@@ -9772,7 +9775,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10093,7 +10096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 730157584}
-  moveSpeed: 0
+  moveSpeed: 1.5
   targetMask:
     serializedVersion: 2
     m_Bits: 128
@@ -10106,8 +10109,8 @@ MonoBehaviour:
   floatingPoints: {fileID: 1457146479}
   MaxHitpoints: 5
   distToPlayer: 0
-  enemyRangeX: 2.52
-  enemyRangeY: 3.94
+  enemyRangeX: 1.76
+  enemyRangeY: 1.71
   enemyDamage: 1
   firePoint: {fileID: 21135764}
 --- !u!61 &1417161673
@@ -11723,7 +11726,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13617,7 +13620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &2068846007
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14094,7 +14097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e62a4f6cad1d6847936edb669d9e9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRadiusIncreaser: 0
 --- !u!1 &2140130781
 GameObject:
   m_ObjectHideFlags: 0

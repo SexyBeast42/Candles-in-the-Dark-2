@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering.LWRP;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,7 +29,6 @@ public class PlayerController : MonoBehaviour
     public Transform attackPos;
     
     //Player health
-    
     public PlayerHealthbar healthBar;
     public float hitPoints = 5f, maxHitPoints = 5f;
    
@@ -53,10 +54,12 @@ public class PlayerController : MonoBehaviour
     {        
         rb = GetComponent<Rigidbody2D>();
         lc = GetComponentInChildren<LightController>();
+        
+        // healthBar = GetComponentInChildren<PlayerHealthbar>();
+        // healthBar.SetMaxHealth(hitPoints);
+        
         playerAction = PlayerAction.Normal;
 
-
-        
         EnemyHit = new UnityEvent();
         EnemyHit.AddListener(lc.IncreaseCurrentRadius);
     }
@@ -123,11 +126,12 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage);
+                    enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage, transform.position);
                 }
 
                 if (enemiesToDamage.Length != 0)
                 {
+                    // print("In EnemyHit.Invoke()");
                     EnemyHit.Invoke();
                 }
                 
@@ -239,14 +243,15 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        // Debug.Log(gameObject.name + " got damaged.");
+        Debug.Log(gameObject.name + " got damaged.");
         
         hitPoints -= damage;
-        healthBar.SetHealth(hitPoints);
+        // healthBar.SetHealth(hitPoints);
        
         if(hitPoints <= 0){
             // Debug.Log(gameObject.name + " dieded.");
-            Destroy(gameObject);
+            // Destroy(gameObject);
+            SceneManager.LoadScene("SampleScene");
         }
     }
 
