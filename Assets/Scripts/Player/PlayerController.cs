@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 {
     //FieldOfViewCall
     [SerializeField] private FieldOfView fieldOfView;
+    
+    //Player light
     private PlayerLightController lc;
     
     //Get player's RigidBody
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public const float moveSpeed = 20f;
     public float rollSpeed;
     private bool isInvunerable;
+    private PlayerRoll rollUI;
     
     //Player attack
     public float playerDamage = 1f, playerRangeX, playerRangeY;
@@ -30,8 +33,7 @@ public class PlayerController : MonoBehaviour
     public Transform attackPos;
     
     //Player health
-    public PlayerHealthbar healthBar;
-    public float hitPoints = 5f, maxHitPoints = 5f;
+    public Health health;
 
     //Player rotation
     public Camera cam;
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour
     {        
         rb = GetComponent<Rigidbody2D>();
         lc = GetComponentInChildren<PlayerLightController>();
+        health = GetComponent<Health>();
+        rollUI = GetComponent<PlayerRoll>();
         
         // healthBar = GetComponentInChildren<PlayerHealthbar>();
         // healthBar.SetMaxHealth(hitPoints);
@@ -234,8 +238,12 @@ public class PlayerController : MonoBehaviour
     //Cooldown for the player's roll
     IEnumerator RollCooldown()
     {
+        rollUI.RemoveRoll();
         rollCD--;
+        
         yield return new WaitForSeconds(5f);
+
+        rollUI.AddRoll();
         rollCD++;
     }
 
@@ -251,17 +259,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvunerable)
         {
-            Debug.Log(gameObject.name + " got damaged.");
-
-            hitPoints -= damage;
-            // healthBar.SetHealth(hitPoints);
-
-            if (hitPoints <= 0)
-            {
-                // Debug.Log(gameObject.name + " dieded.");
-                // Destroy(gameObject);
-                SceneManager.LoadScene("SampleScene");
-            }
+            health.TakeDamage(damage);
         }
     }
 
