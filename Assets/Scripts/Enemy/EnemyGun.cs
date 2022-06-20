@@ -10,10 +10,10 @@ public class EnemyGun : MonoBehaviour
         GameObject bullet = Instantiate(
             bulletObj, 
             transform.position, 
-            quaternion.identity);
+            Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().
             AddForce(
-                -transform.forward.normalized * 
+                transform.forward.normalized * 
                 bullet.GetComponent<ArrowBehaviour>().GetMoveSpeed(), 
                 ForceMode2D.Impulse);
     }

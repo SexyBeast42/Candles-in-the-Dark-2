@@ -127,8 +127,10 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     //enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage, transform.position);
-                    
-                    enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage();
+                    if (enemiesToDamage[i].GetComponent<EnemyHealth>() != null)
+                    {
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage();
+                    }
                 }
 
                 if (enemiesToDamage.Length != 0)

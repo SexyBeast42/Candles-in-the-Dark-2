@@ -156,7 +156,7 @@ public class RangedEnemyAI : MonoBehaviour
         // Cooldown true
 
         // Rotato
-        firePoint.RotateAround(transform.position, Vector3.forward, Time.deltaTime);
+        // firePoint.RotateAround(transform.position, Vector3.forward, Time.deltaTime);
         
         // Light up
         lc.FlashLight();
