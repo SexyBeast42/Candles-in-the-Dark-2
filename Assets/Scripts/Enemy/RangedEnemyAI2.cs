@@ -51,14 +51,20 @@ public class RangedEnemyAI2 : MonoBehaviour
             lc.FlashLight();
             
             //Spawn an arrow
-            Instantiate(arrow, transform.position, Quaternion.identity);
-            
-            
-            timeBtwShots = startTimeBtwShots;
+            StartCoroutine(Shoot());
         }
         else
         {
             timeBtwShots -= Time.deltaTime;
         }
+    }
+    
+    IEnumerator Shoot()
+    {
+        timeBtwShots = startTimeBtwShots;
+        
+        yield return new WaitForSeconds(1);
+        
+        Instantiate(arrow, transform.position, Quaternion.identity);
     }
 }

@@ -3,12 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="759b3a01-002c-4835-9fcd-8cf4313c7900" name="Changes" comment="Player Movement (able to roll as well)">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Candles-in-the-Dark-2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Arrow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Arrow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Arrow 1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Arrow 1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Dava's Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/ArrowBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/ArrowBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyGun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyGun.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/RangedEnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/RangedEnemyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/ArrowBehaviour2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/ArrowBehaviour2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/RangedEnemyAI2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/RangedEnemyAI2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,6 +128,7 @@
       <workItem from="1654954615786" duration="22539000" />
       <workItem from="1655666067388" duration="5212000" />
       <workItem from="1655719755210" duration="2558000" />
+      <workItem from="1655734157497" duration="1562000" />
     </task>
     <servers />
   </component>
