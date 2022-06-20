@@ -145,7 +145,10 @@ public class EnemyAI : MonoBehaviour
     
     private Vector3 GetRoamingPosition()
     {
-        return transform.position + new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f)).normalized * Random.Range(10f, 10f);
+        return transform.position + new Vector3(
+            Random.Range(-1f,1f), 
+            Random.Range(-1f,1f)).normalized * 
+            Random.Range(10f, 10f);
     }
 
     private void FindTarget()

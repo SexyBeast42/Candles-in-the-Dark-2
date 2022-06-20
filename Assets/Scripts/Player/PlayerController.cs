@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 {
     //FieldOfViewCall
     [SerializeField] private FieldOfView fieldOfView;
-    private LightController lc;
+    private PlayerLightController lc;
     
     //Get player's RigidBody
     private Rigidbody2D rb;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float rollCD = 3;
     public const float moveSpeed = 20f;
     public float rollSpeed;
+    private bool isInvunerable;
     
     //Player attack
     public float playerDamage = 1f, playerRangeX, playerRangeY;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
     //Player health
     public PlayerHealthbar healthBar;
     public float hitPoints = 5f, maxHitPoints = 5f;
-   
 
     //Player rotation
     public Camera cam;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {        
         rb = GetComponent<Rigidbody2D>();
-        lc = GetComponentInChildren<LightController>();
+        lc = GetComponentInChildren<PlayerLightController>();
         
         // healthBar = GetComponentInChildren<PlayerHealthbar>();
         // healthBar.SetMaxHealth(hitPoints);
@@ -126,7 +126,11 @@ public class PlayerController : MonoBehaviour
 
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
-                    enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage, transform.position);
+                    //enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage, transform.position);
+                    if (enemiesToDamage[i].GetComponent<EnemyHealth>() != null)
+                    {
+                        enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage();
+                    }
                 }
 
                 if (enemiesToDamage.Length != 0)
@@ -200,6 +204,7 @@ public class PlayerController : MonoBehaviour
             case PlayerAction.Rolling:
                 //print(playerAction);
                 // GetComponent<BoxCollider2D>().enabled = false; //Player invunerable while rolling, but may break collisions
+                isInvunerable = true;
                 
                 float rollSpeedDropMultiplier = 5f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
@@ -209,6 +214,7 @@ public class PlayerController : MonoBehaviour
                 if (rollSpeed < rollSpeedMinimum)
                 {
                     // GetComponent<BoxCollider2D>().enabled = true;
+                    isInvunerable = false;
                     playerAction = PlayerAction.Normal;
                 }
                 break;
@@ -243,15 +249,19 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        Debug.Log(gameObject.name + " got damaged.");
-        
-        hitPoints -= damage;
-        // healthBar.SetHealth(hitPoints);
-       
-        if(hitPoints <= 0){
-            // Debug.Log(gameObject.name + " dieded.");
-            // Destroy(gameObject);
-            SceneManager.LoadScene("SampleScene");
+        if (!isInvunerable)
+        {
+            Debug.Log(gameObject.name + " got damaged.");
+
+            hitPoints -= damage;
+            // healthBar.SetHealth(hitPoints);
+
+            if (hitPoints <= 0)
+            {
+                // Debug.Log(gameObject.name + " dieded.");
+                // Destroy(gameObject);
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
 
