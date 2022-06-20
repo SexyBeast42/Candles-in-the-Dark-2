@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     //Events
     public UnityEvent EnemyHit;
 
+    //Animator
+    public Animator animator;
+
     //To determine whether the player is allowed to do something or not
     private enum PlayerAction
     {
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour
             case PlayerAction.Normal:
                 if (Input.GetMouseButtonDown(0))
                 {
+                    animator.SetTrigger("attack");
                     playerAction = PlayerAction.Attacking;
                 }
                 break;
@@ -185,6 +189,11 @@ public class PlayerController : MonoBehaviour
                 }
 
                 moveDir = new Vector3(moveX, moveY).normalized;
+                animator.SetFloat("Vertical", moveY);
+                animator.SetFloat("Horizontal", moveX);
+                animator.SetFloat("Speed", moveDir.sqrMagnitude);
+
+
                 if (moveX != 0 || moveY != 0)
                 {
                     lastMoveDir = moveDir;
