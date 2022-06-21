@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class RangedEnemyAI2 : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class RangedEnemyAI2 : MonoBehaviour
     public GameObject arrow;
     private EnemyLightController lc;
     private Transform player;
-    private float _enemyViewRadius;
+    public float _enemyViewRadius;
     
     void Start()
     {
@@ -27,6 +29,8 @@ public class RangedEnemyAI2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log("working");
+        
         if (Vector2.Distance(transform.position, player.position) < _enemyViewRadius)
         {
             // Tells the enemy to move away from the player
