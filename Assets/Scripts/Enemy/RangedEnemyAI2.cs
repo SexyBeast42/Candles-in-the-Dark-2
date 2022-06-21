@@ -12,6 +12,7 @@ public class RangedEnemyAI2 : MonoBehaviour
     public GameObject arrow;
     private EnemyLightController lc;
     private Transform player;
+    private float _enemyViewRadius;
     
     void Start()
     {
@@ -25,40 +26,44 @@ public class RangedEnemyAI2 : MonoBehaviour
 
 
     void FixedUpdate()
-    { 
-        // Tells the enemy to move away from the player
-        if (Vector2.Distance(transform.position, player.position) < nearDistance)
+    {
+        if (Vector2.Distance(transform.position, player.position) < _enemyViewRadius)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -moveSpeed * Time.deltaTime);
-        } 
-        
-        // Tells the enemy to move towards the player
-        else if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
-        }
-        
-        // Tells the enemy to stop moving once they're in range
-        else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > nearDistance)
-        {
-            transform.position = this.transform.position;
-        }
+            // Tells the enemy to move away from the player
+            if (Vector2.Distance(transform.position, player.position) < nearDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.position, -moveSpeed * Time.deltaTime);
+            }
 
-        // Shot Cooldown
-        if (timeBtwShots <= 0)
-        {
-            // Flashes Light
-            lc.FlashLight();
-            
-            //Spawn an arrow
-            StartCoroutine(Shoot());
-        }
-        else
-        {
-            timeBtwShots -= Time.deltaTime;
+            // Tells the enemy to move towards the player
+            else if (Vector2.Distance(transform.position, player.position) > stoppingDistance)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            }
+
+            // Tells the enemy to stop moving once they're in range
+            else if (Vector2.Distance(transform.position, player.position) < stoppingDistance &&
+                     Vector2.Distance(transform.position, player.position) > nearDistance)
+            {
+                transform.position = this.transform.position;
+            }
+
+            // Shot Cooldown
+            if (timeBtwShots <= 0)
+            {
+                // Flashes Light
+                lc.FlashLight();
+
+                //Spawn an arrow
+                StartCoroutine(Shoot());
+            }
+            else
+            {
+                timeBtwShots -= Time.deltaTime;
+            }
         }
     }
-    
+
     IEnumerator Shoot()
     {
         timeBtwShots = startTimeBtwShots;
