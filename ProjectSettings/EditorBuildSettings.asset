@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/DyingScene.unity
+    guid: 521e27557dd81f1419e82490626c88cc
   m_configObjects: {}

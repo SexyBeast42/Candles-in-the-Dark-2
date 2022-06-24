@@ -12,4 +12,7 @@ public void QuitGame(){
     Debug.Log("Quit");
     Application.Quit();
 }
+public void Retry(){
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+}
 }

@@ -29,8 +29,6 @@ public class RangedEnemyAI2 : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("working");
-        
         if (Vector2.Distance(transform.position, player.position) < _enemyViewRadius)
         {
             // Tells the enemy to move away from the player

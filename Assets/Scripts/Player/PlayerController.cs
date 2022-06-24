@@ -7,6 +7,7 @@ using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour
                     //enemiesToDamage[i].GetComponent<EnemyAI>().TakeDamage(playerDamage, transform.position);
                     if (enemiesToDamage[i].GetComponent<EnemyHealth>() != null)
                     {
+                        print("attaking");
                         enemiesToDamage[i].GetComponent<EnemyHealth>().TakeDamage();
                     }
                 }

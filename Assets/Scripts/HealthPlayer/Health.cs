@@ -61,7 +61,8 @@ public class Health : MonoBehaviour
         else
         {
             //player dead
-            SceneManager.LoadScene(scene.name);
+            //SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 

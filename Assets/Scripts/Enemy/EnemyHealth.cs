@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage()
     {
+        Debug.Log(name + " got damaged");
         currentHealth--;
 
         if (currentHealth <= 0)
